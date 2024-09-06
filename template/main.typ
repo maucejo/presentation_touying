@@ -74,7 +74,7 @@ end
 
 #show: appendix
 
-= Annexes  <touying:hidden>
+= Annexes <touying:hidden>
 
 == Une première annexe
 
