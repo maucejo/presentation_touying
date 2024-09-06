@@ -12,6 +12,7 @@
     config-info(
       font: "Lato",
       math-font: "Lete Sans Math",
+      code-font: "DejaVu Sans Mono",
       logo: none,
       footer-logo: image("resources/assets/lecnam.png"),
       title-logo-height: 23%
@@ -37,9 +38,9 @@
 
     config-methods(
       init: (self: none, body) => {
-
-        set text(font: self.info.font, size: 20pt)
+        set text(font: self.info.font, size: 20pt, lang: lang)
         show math.equation: set text(font: self.info.math-font)
+        show raw: set text(font: self.info.code-font)
         set par(justify: true)
 
         set list(marker: ([#text(fill:self.colors.primary)[#sym.bullet]], [#text(fill:self.colors.primary)[#sym.triangle.filled.small.r]]))
@@ -52,7 +53,6 @@
     config-store(
       align: align,
       lang: lang,
-      isappendix: false,
       sec-count: counter("sec-count"),
       app-count: counter("app-count")
     ),

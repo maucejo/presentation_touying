@@ -148,17 +148,18 @@
 )
 
 #let content-slide = touying-slide-wrapper(self => {
+  let localizaton = json("resources/i18n/fr.json")
+  if self.store.lang == "en" {
+    localization = json("resources/i18n/en.json")
+  }
+
   let header = {
     set align(top)
     show: components.cell.with(fill: self.colors.primary, inset: 1em)
     set align(horizon)
     set strong(delta: 350)
     set text(fill: white, size: 1.25em)
-    if self.store.lang == "fr" {
-      strong("Sommaire")
-    } else {
-      strong("Outline")
-    }
+    strong(localizaton.toc)
   }
 
  let self = utils.merge-dicts(
