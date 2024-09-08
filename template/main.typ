@@ -1,6 +1,10 @@
 #import "@preview/touying:0.5.2": *
 #import "../src/presentation-template.typ": *
 
+#let colors = (
+  red: rgb("#c1002a")
+)
+
 #let title = [Title
 #v(-0.5em)
 #line(length: 15%, stroke: 0.075em + colors.red)
@@ -33,7 +37,7 @@
 
 #subtitle("Un sous-titre")
 
-#boxeq[
+#emphbox[
     $
     bold(z)_(k + 1) = bold(A) hs bold(z)_k + bold(B) hs bold(u)_k + bold(w)_k \
     bold(y)_k = bold(C) hs bold(z)_k + bold(v)_k

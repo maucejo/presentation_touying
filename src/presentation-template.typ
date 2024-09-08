@@ -21,7 +21,12 @@
     config-colors(
       primary: rgb("#c1002a"),
       secondary: rgb("#405a68"),
-      background: rgb("#405a68").lighten(95%)
+      background: rgb("#405a68").lighten(95%),
+      box: rgb("#405a68"),
+      info: rgb("#c1002a"),
+      tip: rgb(31, 136, 61),
+      important: rgb(9, 105, 218),
+      question: rgb(130, 80, 223),
     ),
 
     config-page(

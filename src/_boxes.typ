@@ -1,35 +1,31 @@
+#import "@preview/touying:0.5.2": *
 #import "@preview/showybox:2.0.1": *
 #import "@preview/codelst:2.0.1": sourcecode
-
-#let colors = (
-  red: rgb("#c1002a"),
-  gray: rgb("#405a68"),
-  green: rgb(31, 136, 61),
-  blue: rgb(9, 105, 218),
-  purple: rgb(130, 80, 223),
-)
 
 //---- Mathematics ----
 // Space for equations
 #let hs = sym.space.thin
 
 // Emphasized box (for equations)
-#let boxeq(body) = {
+#let _emphbox(self: none, body) = {
   set align(center)
   box(
-    stroke: 1pt + colors.gray.lighten(20%),
+    stroke: 1pt + self.colors.box.lighten(20%),
     radius: 5pt,
     inset: 0.5em,
-    fill: colors.gray.lighten(80%),
+    fill: self.colors.box.lighten(80%),
   )[#body]
 }
+#let emphbox(body) = touying-fn-wrapper(_emphbox.with(body))
 //----
 
-#let subtitle(body) = {
+
+#let _subtitle(self: none, body) = {
   set align(top)
-  set text(size: 1.2em, fill: colors.red, weight: "bold")
+  set text(size: 1.2em, fill: self.colors.primary, weight: "bold")
   pad(left: -0.8em, body)
 }
+#let subtitle(body) = touying-fn-wrapper(_subtitle.with(body))
 
 //---- Utilities for boxes ----
 #let box-title(a, b) = {
@@ -60,90 +56,94 @@
 
 //---- Utility boxes ----
 // Information box
-#let info(body) = {
+#let _info(self: none, body) = {
   set text(size: 0.8em)
 
   showybox(
-    title: box-title(color-svg("resources/assets/icons/info.svg", colors.red, width: 1em), [*Note*]),
+    title: box-title(color-svg("resources/assets/icons/info.svg", self.colors.info, width: 1em), [*Note*]),
     title-style: (
-      color: colors.red,
+      color: self.colors.info,
       sep-thickness: 0pt,
     ),
     frame: (
-      title-color: colors.red.lighten(80%),
-      border-color: colors.red,
+      title-color: self.colors.info.lighten(80%),
+      border-color: self.colors.info,
       body-color: none,
       thickness: (left: 3pt),
       radius: (top-left: 0pt, bottom-right: 1em, top-right: 1em),
     )
   )[#body]
 }
+#let info(body) = touying-fn-wrapper(_info.with(body))
 
 // Tip box
-#let tip(body) = {
+#let _tip(self: none, body) = {
   set text(size: 0.8em)
 
   showybox(
-    title: box-title(color-svg("resources/assets/icons/light-bulb.svg", colors.green, width: 1em), [*Tip*]),
+    title: box-title(color-svg("resources/assets/icons/light-bulb.svg", self.colors.tip, width: 1em), [*Tip*]),
     title-style: (
-      color: colors.green,
+      color: self.colors.tip,
       sep-thickness: 0pt,
     ),
     frame: (
-      title-color: colors.green.lighten(80%),
-      border-color: colors.green,
+      title-color: self.colors.tip.lighten(80%),
+      border-color: self.colors.tip,
       body-color: none,
       thickness: (left: 3pt),
       radius: (top-left: 0pt, bottom-right: 1em, top-right: 1em),
     )
   )[#body]
 }
+#let tip(body) = touying-fn-wrapper(_tip.with(body))
 
 // Important box
-#let important(body) = {
+#let _important(self: none, body) = {
   set text(size: 0.8em)
   showybox(
-    title: box-title(color-svg("resources/assets/icons/report.svg", colors.blue, width: 1em), [*Important*]),
+    title: box-title(color-svg("resources/assets/icons/report.svg", self.colors.important, width: 1em), [*Important*]),
     title-style: (
-      color: colors.blue,
+      color: self.colors.important,
       sep-thickness: 0pt,
     ),
     frame: (
-      title-color: colors.blue.lighten(80%),
-      border-color: colors.blue,
+      title-color: self.colors.important.lighten(80%),
+      border-color: self.colors.important,
       body-color: none,
       thickness: (left: 3pt),
       radius: (top-left: 0pt, bottom-right: 1em, top-right: 1em),
     )
   )[#body]
 }
+#let important(body) = touying-fn-wrapper(_important.with(body))
 
 // Question box
-#let question(body, type: none) = {
+#let _question(self: none, body) = {
   set text(size: 0.8em)
   showybox(
-    title: box-title(color-svg("resources/assets/icons/question.svg", colors.purple, width: 1em), [*Question*]),
+    title: box-title(color-svg("resources/assets/icons/question.svg", self.colors.question, width: 1em), [*Question*]),
     title-style: (
-      color: colors.purple,
+      color: self.colors.question,
       sep-thickness: 0pt,
     ),
     frame: (
-      title-color: colors.purple.lighten(80%),
-      border-color: colors.purple,
+      title-color: self.colors.question.lighten(80%),
+      border-color: self.colors.question,
       body-color: none,
       thickness: (left: 3pt),
       radius: (top-left: 0pt, bottom-right: 1em, top-right: 1em),
     )
   )[#body]
 }
+#let question(body) = touying-fn-wrapper(_question.with(body))
 
 // Code box
-#let code(lang: none, body) = sourcecode(
+#let _code(self: none, lang: none, body) = sourcecode(
     frame: showybox.with(
       title: [*Code* #h(1fr) #strong(lang)],
       frame: (
-        title-color: colors.red,
-        border-color: colors.red,
+        title-color: self.colors.primary,
+        border-color: self.colors.primary,
         body-color: none,
         thickness: (left: 3pt),
         radius: (top-left: 0pt, top-right: 1em),
@@ -151,6 +151,7 @@
     ),
     body
 )
+#let code(lang: none, body) = touying-fn-wrapper(_code.with(lang: lang, body))
 
 // Link box
 #let link-box(location, name) = {
