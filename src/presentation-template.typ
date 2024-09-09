@@ -15,7 +15,7 @@
       code-font: "DejaVu Sans Mono",
       logo: none,
       footer-logo: image("resources/assets/lecnam.png"),
-      title-logo-height: 23%
+      title-logo-height: 4em
     ),
 
     config-colors(

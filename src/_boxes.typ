@@ -154,10 +154,11 @@
 #let code(lang: none, body) = touying-fn-wrapper(_code.with(lang: lang, body))
 
 // Link box
-#let link-box(location, name) = {
+#let _link-box(self: none, location, name) = {
   set align(bottom + left)
-  block(fill: colors.red, radius: 1em, inset: 0.5em)[
+  block(fill: self.colors.primary, radius: 1em, inset: 0.5em)[
     #set text(fill: white, size: 0.8em, weight: "bold")
     #link(location, name)
   ]
 }
+#let link-box(location, name) = touying-fn-wrapper(_link-box.with(location, name))
