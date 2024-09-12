@@ -21,9 +21,10 @@
 
 
 #let _subtitle(self: none, body) = {
-  set align(top)
-  set text(size: 1.2em, fill: self.colors.primary, weight: "bold")
-  pad(left: -0.8em, body)
+  if self.store.navigation == "topbar" {
+    set text(size: 1.2em, fill: self.colors.primary, weight: "bold")
+    place(top + left, pad(left: -0.8em, top: -0.25em, body))
+  }
 }
 #let subtitle(body) = touying-fn-wrapper(_subtitle.with(body))
 

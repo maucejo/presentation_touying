@@ -1,4 +1,5 @@
 #import "@preview/touying:0.5.2": *
+#import "_utils.typ": *
 
 #let _typst-builtin-align = align
 
@@ -18,14 +19,29 @@
 
     let align = _typst-builtin-align
     let header(self) = {
-      set align(top)
-      show: components.cell.with(fill: self.colors.primary, inset: 1em)
-      set align(horizon)
-      set strong(delta: 350)
-      set text(fill: white, size: 1.25em)
-      strong(utils.display-current-heading(level: 1))
-      h(1fr)
-      text(size: 0.8em, strong(utils.display-current-heading()))
+      if self.store.navigation == "topbar" {
+        set align(top)
+        show: components.cell.with(fill: self.colors.primary, inset: 1em)
+        set align(horizon)
+        set strong(delta: 350)
+        set text(fill: white, size: 1.25em)
+        strong(utils.display-current-heading(level: 1))
+        h(1fr)
+        text(size: 0.8em, strong(utils.display-current-heading()))
+      } else if self.store.navigation == "mini-slides" {
+        show: components.cell.with(fill: gradient.linear(self.colors.background.darken(10%), self.colors.background, dir: ttb))
+        my-mini-slides(
+          self: self,
+          fill: self.colors.primary,
+          alpha: 60%,
+          display-section: self.store.mini-slides.at("display-section", default: false),
+          display-subsection: self.store.mini-slides.at("display-subsection", default: true),
+          short-heading: self.store.mini-slides.at("short-heading", default: true),
+      )
+        line(length: 100%, stroke: 0.5pt + self.colors.primary)
+
+        place(dx: 1em, dy: 0.65em, text(size: 1.2em, fill: self.colors.primary, weight: "bold", utils.display-current-heading(())))
+      }
     }
 
     let footer(self) = {
@@ -91,6 +107,7 @@
     show: setting
     body
   }
+
   touying-slide(self: self, config: config, repeat: repeat, setting: new-setting, composer: composer, ..bodies)
   }
 )
@@ -154,12 +171,23 @@
   }
 
   let header = {
-    set align(top)
-    show: components.cell.with(fill: self.colors.primary, inset: 1em)
-    set align(horizon)
     set strong(delta: 350)
-    set text(fill: white, size: 1.25em)
-    strong(localizaton.toc)
+    if self.store.navigation == "topbar" {
+      set align(top)
+      show: components.cell.with(fill: self.colors.primary, inset: 1em)
+      set align(horizon)
+      set text(fill: white, size: 1.25em)
+      strong(localizaton.toc)
+    } else if self.store.navigation == "mini-slides" {
+      set align(top)
+      show: components.cell.with(fill: gradient.linear(self.colors.background.darken(10%), self.colors.background, dir: ttb))
+      v(0.8em)
+      set align(horizon)
+      set text(fill: self.colors.primary, size: 1.25em)
+      h(0.75em) + strong(localizaton.toc)
+      v(-0.6em)
+      line(length: 100%, stroke: 0.5pt + self.colors.primary)
+    }
   }
 
  let self = utils.merge-dicts(
@@ -224,7 +252,6 @@
   )
   touying-slide(self: self, content)
 }
-
 )
 
 #let focus-slide(align: center + horizon, body) = touying-slide-wrapper(self => {

@@ -18,6 +18,7 @@
 #let authors = [#text(fill: colors.red, [Author A]) #h(1em) Author B]
 
 #show: presentation-theme.with(
+  navigation: "mini-slides",
   config-info(
     title: title,
     short-title: [Short title],
@@ -35,7 +36,6 @@
 
 == Slide title
 
-#subtitle("Un sous-titre")
 
 #emphbox[
     $
@@ -69,6 +69,7 @@ end
 ```
 ]
 
+#subtitle("A slide with a list")
 
 #focus-slide[
   Thank you for your attention
@@ -78,9 +79,9 @@ end
 
 #show: appendix
 
-= Annexes <touying:hidden>
+= Appendices <touying:hidden>
 
-== Une première annexe
+== A first appendix
 
-== Une seconde annexe
+== A second appendix
 

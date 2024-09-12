@@ -5,6 +5,7 @@
 #let presentation-theme(
   aspect-ratio: "16-9",
   lang: "fr",
+  navigation: "topbar",
   ..args,
   body
 ) = {
@@ -58,8 +59,10 @@
     config-store(
       align: align,
       lang: lang,
+      navigation: navigation,
+      mini-slides: (display-section: false, display-subsection: true, short-heading: false),
       sec-count: counter("sec-count"),
-      app-count: counter("app-count")
+      app-count: counter("app-count"),
     ),
     ..args,
   )
