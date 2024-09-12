@@ -248,7 +248,7 @@
   self = utils.merge-dicts(
     self,
     config-common(freeze-slide-counter: true),
-    config-page(fill: self.colors.secondary.lighten(95%))
+    config-page(fill: self.colors.background)
   )
   touying-slide(self: self, content)
 }
