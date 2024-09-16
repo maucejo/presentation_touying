@@ -2,10 +2,6 @@
 #import "@preview/showybox:2.0.1": *
 #import "@preview/codelst:2.0.1": sourcecode
 
-//---- Mathematics ----
-// Space for equations
-#let hs = sym.space.thin
-
 // Emphasized box (for equations)
 #let _emphbox(self: none, body) = {
   set align(center)
@@ -18,7 +14,6 @@
 }
 #let emphbox(body) = touying-fn-wrapper(_emphbox.with(body))
 //----
-
 
 #let _subtitle(self: none, body) = {
   if self.store.navigation == "topbar" {
