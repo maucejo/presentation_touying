@@ -11,6 +11,10 @@
 ) = {
   show: touying-slides.with(
     config-info(
+      title: none,
+      short-title: none,
+      author: none,
+      institution: none,
       font: "Lato",
       math-font: "Lete Sans Math",
       code-font: "DejaVu Sans Mono",
@@ -44,7 +48,7 @@
 
     config-methods(
       init: (self: none, body) => {
-        set text(font: self.info.font, size: 20pt, lang: lang)
+        set text(font: self.info.font, size: 20pt, lang: lang, ligatures: false)
         show math.equation: set text(font: self.info.math-font)
         show raw: set text(font: self.info.code-font)
         set par(justify: true)

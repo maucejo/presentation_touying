@@ -25,7 +25,7 @@
     author: authors,
     institution: labo,
     logo: image("../src/resources/assets/logo_cnam_lmssc.png"),
-  )
+  ),
 )
 
 #title-slide

@@ -1,0 +1,15 @@
+[package]
+name = "presentation-touying"
+version = "0.1.0"
+authors = ["Mathieu Aucejo"]
+license = "MIT"
+description = "Slides template for presentations"
+entrypoint = "src/presentation-template.typ"
+categories = ["presentatin"]
+# repository = "https://github.com/maucejo/Cnam_thesis_template"
+
+[template]
+path = "template"
+entrypoint = "main.typ"
+
+
