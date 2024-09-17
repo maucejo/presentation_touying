@@ -151,7 +151,6 @@
 
 // Link box
 #let _link-box(self: none, location, name) = {
-  set align(bottom + left)
   block(fill: self.colors.primary, radius: 1em, inset: 0.5em)[
     #set text(fill: white, size: 0.8em, weight: "bold")
     #link(location, name)
