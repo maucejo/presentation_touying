@@ -27,7 +27,7 @@
         set text(fill: white, size: 1.25em)
         strong(utils.display-current-heading(level: 1))
         h(1fr)
-        text(size: 0.8em, strong(utils.display-current-heading()))
+        text(size: 0.8em, strong(utils.display-current-heading(level: 2)))
       } else if self.store.navigation == "mini-slides" {
         show: components.cell.with(fill: gradient.linear(self.colors.background.darken(10%), self.colors.background, dir: ttb))
         my-mini-slides(
@@ -52,7 +52,7 @@
          grid(
           columns: (1fr, 4fr, 1fr),
           align: center + horizon,
-          [ #set image(height: 2em)
+          [ #set image(height: 1.75em)
             #self.info.footer-logo
           ],
           [
@@ -105,6 +105,8 @@
   let new-setting = body => {
     show: align.with(self.store.align)
     show: setting
+
+    if self.store.navigation == "topbar" {v(-1em)}
     body
   }
 
@@ -123,8 +125,6 @@
           set align(top + right)
           v(-2.5em)
           self.info.logo
-        } else if logo == none {
-          v(2em)
         } else {
           v(-2.5em)
           grid(
@@ -135,7 +135,6 @@
         }
       }
 
-      v(0.5em)
       line(length: 100%, stroke: 0.15em + self.colors.primary)
       text(size: 1.75em, strong(self.info.title, delta: 300))
       line(length: 100%, stroke: 0.15em + self.colors.primary)

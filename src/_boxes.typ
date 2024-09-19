@@ -19,6 +19,7 @@
   if self.store.navigation == "topbar" {
     set text(size: 1.2em, fill: self.colors.primary, weight: "bold")
     place(top + left, pad(left: -0.8em, top: -0.25em, body))
+    v(1em)
   }
 }
 #let subtitle(body) = touying-fn-wrapper(_subtitle.with(body))
