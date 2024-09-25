@@ -1,4 +1,3 @@
-#import "@preview/touying:0.5.2": *
 #import "../src/presentation-template.typ": *
 
 #let colors = (
