@@ -18,7 +18,7 @@
       font: "Lato",
       math-font: "Lete Sans Math",
       code-font: "DejaVu Sans Mono",
-      logo: none,
+      logo: image("resources/assets/logo_cnam_lmssc.png"),
       footer-logo: image("resources/assets/lecnam.png"),
       title-logo-height: 4em
     ),
