@@ -23,7 +23,8 @@
     short-title: [Short title],
     author: authors,
     institution: labo,
-    logo: image("../src/resources/assets/logo_cnam_lmssc.png"),
+    // logo: (image("../src/resources/assets/logo_cnam_lmssc.png"), image("../src/resources/assets/logo_cnam_lmssc.png")),
+    // logo: image("../src/resources/assets/logo_cnam_lmssc.png"),
   ),
 )
 

@@ -40,7 +40,7 @@
       )
         line(length: 100%, stroke: 0.5pt + self.colors.primary)
 
-        place(dx: 1em, dy: 0.65em, text(size: 1.2em, fill: self.colors.primary, weight: "bold", utils.display-current-heading(())))
+        place(dx: 1em, dy: 0.65em, text(size: 1.2em, fill: self.colors.primary, weight: "bold", utils.display-current-heading(level: 2)))
       }
     }
 
@@ -117,30 +117,32 @@
 #let title-slide = touying-slide-wrapper(self => {
   let content = {
     set align(center + horizon)
-
-    block(width: 100%, inset: 2cm, {
+    if self.info.logo != none{
       set image(height: self.info.title-logo-height)
-      if self.info.logo != none {
-        if type(self.info.logo) == "content" {
-          set align(top + right)
-          v(-2.5em)
-          self.info.logo
-        } else {
-          v(-2.5em)
+      if type(self.info.logo) == content {
+        place(top + right, dx: -2cm, dy: 0.25cm, self.info.logo)
+      } else {
+        let im-grid = {
           grid(
             columns: self.info.logo.len(),
             column-gutter: 1fr,
-            ..self.info.logo.map((logos) => (align(center + horizon, logos)))
+            align: center + horizon,
+            inset: 2cm,
+            ..self.info.logo.map((logos) => logos)
           )
         }
-      }
 
+        place(top, dy: -1.75cm, im-grid)
+      }
+    }
+
+    block(width: 100%, inset: 2cm, {
       line(length: 100%, stroke: 0.15em + self.colors.primary)
       text(size: 1.75em, strong(self.info.title, delta: 300))
       line(length: 100%, stroke: 0.15em + self.colors.primary)
 
-      v(0.5em)
       if self.info.author != none {
+        v(0.5em)
         set text(size: 1em)
         block(spacing: 1em, strong(self.info.author, delta: 250))
       }
