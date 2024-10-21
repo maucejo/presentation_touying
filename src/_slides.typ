@@ -1,5 +1,4 @@
-#import "@preview/touying:0.5.2": *
-#import "_utils.typ": *
+#import "@preview/touying:0.5.3": *
 
 #let _typst-builtin-align = align
 
@@ -30,14 +29,15 @@
         text(size: 0.8em, strong(utils.display-current-heading(level: 2)))
       } else if self.store.navigation == "mini-slides" {
         show: components.cell.with(fill: gradient.linear(self.colors.background.darken(10%), self.colors.background, dir: ttb))
-        my-mini-slides(
-          self: self,
+        components.mini-slides(
+          self:self,
           fill: self.colors.primary,
           alpha: 60%,
           display-section: self.store.mini-slides.at("display-section", default: false),
           display-subsection: self.store.mini-slides.at("display-subsection", default: true),
           short-heading: self.store.mini-slides.at("short-heading", default: true),
-      )
+          linebreaks: false
+        )
         line(length: 100%, stroke: 0.5pt + self.colors.primary)
 
         place(dx: 1em, dy: 0.65em, text(size: 1.2em, fill: self.colors.primary, weight: "bold", utils.display-current-heading(level: 2)))

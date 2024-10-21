@@ -17,7 +17,7 @@
 #let authors = [#text(fill: colors.red, [Author A]) #h(1em) Author B]
 
 #show: presentation-theme.with(
-  // navigation: "mini-slides",
+  navigation: "mini-slides",
   config-info(
     title: title,
     short-title: [Short title],
