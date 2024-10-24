@@ -1,5 +1,5 @@
 #import "@preview/touying:0.5.3": *
-#import "@preview/showybox:2.0.1": *
+#import "@preview/showybox:2.0.3": *
 #import "@preview/codelst:2.0.1": sourcecode
 
 // Emphasized box (for equations)

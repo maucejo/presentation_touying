@@ -2,6 +2,7 @@
 
 #let _typst-builtin-align = align
 
+
 #let slide(
   title: auto,
   subtitle: none,
@@ -17,12 +18,12 @@
     }
 
     let align = _typst-builtin-align
+    set strong(delta: 0)
     let header(self) = {
       if self.store.navigation == "topbar" {
         set align(top)
         show: components.cell.with(fill: self.colors.primary, inset: 1em)
         set align(horizon)
-        set strong(delta: 350)
         set text(fill: white, size: 1.25em)
         strong(utils.display-current-heading(level: 1))
         h(1fr)
@@ -70,7 +71,7 @@
                 ])
               }
             } else {
-              box(stroke: 1.75pt + self.colors.primary, radius: 5pt, inset: -0.5em,outset: 1em)[#utils.slide-counter.display() / #utils.last-slide-number]
+              context box(stroke: 1.75pt + self.colors.primary, radius: 5pt, inset: -0.5em,outset: 1em)[#utils.slide-counter.display() / #utils.last-slide-number]
             }
           ]
         )
@@ -115,6 +116,7 @@
 )
 
 #let title-slide = touying-slide-wrapper(self => {
+  set strong(delta: 0)
   let content = {
     set align(center + horizon)
     if self.info.logo != none{
@@ -138,13 +140,13 @@
 
     block(width: 100%, inset: 2cm, {
       line(length: 100%, stroke: 0.15em + self.colors.primary)
-      text(size: 1.75em, strong(self.info.title, delta: 300))
+      text(size: 1.75em, strong(self.info.title))
       line(length: 100%, stroke: 0.15em + self.colors.primary)
 
       if self.info.author != none {
         v(0.5em)
         set text(size: 1em)
-        block(spacing: 1em, strong(self.info.author, delta: 250))
+        block(spacing: 1em, strong(self.info.author))
       }
 
       if self.info.institution != none {
@@ -171,8 +173,8 @@
     localization = json("resources/i18n/en.json")
   }
 
+  set strong(delta: 0)
   let header = {
-    set strong(delta: 350)
     if self.store.navigation == "topbar" {
       set align(top)
       show: components.cell.with(fill: self.colors.primary, inset: 1em)
@@ -208,7 +210,7 @@
     }
 
     set align(horizon)
-    components.adaptive-columns(text(size: 1.2em, strong(outline(title:none, indent: 1em, depth: 1, fill: none), delta: 250)))
+    components.adaptive-columns(text(size: 1.2em, strong(outline(title:none, indent: 1em, depth: 1, fill: none))))
 }
 
   touying-slide(self: self, content)
@@ -216,6 +218,7 @@
 
 #let new-section-slide(level: 1, numbered: true, title) = touying-slide-wrapper(self => {
   let content = {
+    set strong(delta: 0)
     self.store.sec-count.step()
 
     set align(horizon)
@@ -237,7 +240,7 @@
    stack(
       dir: ttb,
       spacing: 0.5em,
-      strong(utils.display-current-heading(level: level, numbered: numbered), delta: 250),
+      [*#utils.display-current-heading(level: level, numbered: numbered)*],
       block(
         height: 2pt,
         width: 100%,
@@ -258,11 +261,14 @@
 #let focus-slide(align: center + horizon, body) = touying-slide-wrapper(self => {
   let _align = align
   let align = _typst-builtin-align
+
   self = utils.merge-dicts(
     self,
     config-common(freeze-slide-counter: true),
     config-page(fill: self.colors.primary, margin: 2em),
   )
+
   set text(fill: white, size: 2em)
+  set strong(delta: 0)
   touying-slide(self: self, align(_align, strong(body)))
 })
