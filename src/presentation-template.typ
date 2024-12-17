@@ -1,6 +1,6 @@
 #import "@preview/touying:0.5.2": *
-#import "_boxes.typ": *
-#import "_slides.typ": *
+#import "presentation-boxes.typ": *
+#import "presentation-slides.typ": *
 
 #let presentation-theme(
   aspect-ratio: "16-9",
