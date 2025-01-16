@@ -24,9 +24,9 @@
         show: components.cell.with(fill: self.colors.primary, inset: 1em)
         set align(horizon)
         set text(fill: white, size: 1.25em)
-        strong(utils.display-current-heading(level: 1))
+        strong(utils.display-current-heading(level: 1, numbered: false))
         h(1fr)
-        text(size: 0.8em, strong(utils.display-current-heading(level: 2)))
+        text(size: 0.8em, strong(utils.display-current-heading(level: 2, numbered: false)))
       } else if self.store.navigation == "mini-slides" {
         show: components.cell.with(fill: gradient.linear(self.colors.background.darken(10%), self.colors.background, dir: ttb))
         components.mini-slides(
@@ -202,10 +202,12 @@
   )
 
   let content = {
+
     show outline.entry: it => {
-      let number = int(it.page.text)  + 1
+      let number = it.body.children.first()
+      let section = it.body.children.slice(1).join()
       block(above: 2em, below: 0em)
-      [#text([#number.], fill: self.colors.primary) #h(0.25em) #it.body]
+      [#text([#number], fill: self.colors.primary) #h(0.25em) #section]
     }
 
     set align(horizon)
@@ -239,7 +241,7 @@
    stack(
       dir: ttb,
       spacing: 0.5em,
-      [*#utils.display-current-heading(level: level, numbered: numbered)*],
+      [*#utils.display-current-heading(level: level, numbered: false)*],
       block(
         height: 2pt,
         width: 100%,

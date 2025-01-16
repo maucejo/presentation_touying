@@ -71,5 +71,7 @@
     ..args,
   )
 
+  set heading(numbering: "1.")
+
   body
 }
