@@ -1,4 +1,4 @@
-#import "@preview/touying:0.5.2": *
+#import "@preview/touying:0.5.3": *
 #import "presentation-boxes.typ": *
 #import "presentation-slides.typ": *
 
