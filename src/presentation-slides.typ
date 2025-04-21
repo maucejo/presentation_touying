@@ -1,4 +1,4 @@
-#import "@preview/touying:0.5.3": *
+#import "@preview/touying:0.6.1": *
 
 #let _typst-builtin-align = align
 
@@ -18,7 +18,7 @@
 
     let align = _typst-builtin-align
     set strong(delta: 0)
-    let header(self) = {
+    let header(self) = if title != none {
       if self.store.navigation == "topbar" {
         set align(top)
         show: components.cell.with(fill: self.colors.primary, inset: 1em)
@@ -42,6 +42,8 @@
 
         place(dx: 1em, dy: 0.65em, text(size: 1.2em, fill: self.colors.primary, weight: "bold", utils.display-current-heading(level: 2)))
       }
+    } else {
+      return none
     }
 
     let footer(self) = {
@@ -203,15 +205,16 @@
 
   let content = {
 
-    show outline.entry: it => {
-      let number = it.body.children.first()
-      let section = it.body.children.slice(1).join()
+    set outline.entry(fill: none)
+    show outline.entry: it => context {
+      let number = it.prefix()
+      let section = it.element.body
       block(above: 2em, below: 0em)
       [#text([#number], fill: self.colors.primary) #h(0.25em) #section]
     }
 
     set align(horizon)
-    components.adaptive-columns(text(size: 1.2em, strong(outline(title:none, indent: 1em, depth: 1, fill: none))))
+    components.adaptive-columns(text(size: 1.2em, strong(outline(title:none, indent: 1em, depth: 1))))
 }
 
   touying-slide(self: self, content)
@@ -262,6 +265,19 @@
 #let focus-slide(align: center + horizon, body) = touying-slide-wrapper(self => {
   let _align = align
   let align = _typst-builtin-align
+
+  self = utils.merge-dicts(
+    self,
+    config-common(freeze-slide-counter: true),
+    config-page(fill: self.colors.primary, margin: 2em),
+  )
+
+  set text(fill: white, size: 2em)
+  set strong(delta: 0)
+  touying-slide(self: self, align(_align, strong(body)))
+})
+
+#let empty-slide(body) = touying-slide-wrapper(self => {
 
   self = utils.merge-dicts(
     self,

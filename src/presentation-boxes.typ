@@ -1,6 +1,6 @@
-#import "@preview/touying:0.5.3": *
-#import "@preview/showybox:2.0.3": *
-#import "@preview/codelst:2.0.1": sourcecode
+#import "@preview/touying:0.6.1": *
+#import "@preview/showybox:2.0.4": *
+#import "@preview/codelst:2.0.2": sourcecode
 
 // Emphasized box (for equations)
 #let _emphbox(self: none, body) = {
@@ -47,7 +47,7 @@
   ..args,
 ) = {
   let data = colorize(read(path), color)
-  return image.decode(data, ..args)
+  return image(bytes(data), ..args)
 }
 //----
 

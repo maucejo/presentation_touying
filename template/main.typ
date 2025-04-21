@@ -55,6 +55,10 @@
 
 = Third's section
 
+#slide(title:none)[
+  #lorem(10)
+]
+
 == Code
 
 #lorem(10)
@@ -67,7 +71,7 @@ end
 ```
 ]
 
-#subtitle("A slide with a list")
+// #subtitle("A slide with a list")
 
 #focus-slide[
   Thank you for your attention
