@@ -53,8 +53,31 @@
         show raw: set text(font: self.info.code-font)
         set par(justify: true)
 
-        set list(marker: ([#text(fill:self.colors.primary)[#sym.bullet]], [#text(fill:self.colors.primary)[#sym.triangle.filled.small.r]]))
+        set list(marker: ([#text(fill:self.colors.primary)[#sym.bullet]], [#text(fill:self.colors.primary)[#sym.triangle.filled.small.r]], [#text(fill:self.colors.primary)[#sym.square.filled]]))
+        let list-counter = counter("list")
+        show list: it => context {
+          list-counter.step()
+          let lc = list-counter.get().first() + 1
+          set text(size: 1em - (lc - 1)*0.05em)
+          it
+          list-counter.update(i => i - 1)
+        }
+
         set enum(numbering: n => text(fill:self.colors.primary)[#n.])
+
+        // Footnote configuration
+        set footnote.entry(separator: none)
+        show footnote.entry: it => {
+          let loc = it.note.location()
+          let countfoot = counter(footnote).at(loc).first()
+          set text(size: 0.8em, style: "italic")
+
+          v(-1.25em)
+          [#super[#text(fill: self.colors.primary)[#countfoot]] #it.note.body]
+          v(1em)
+        }
+
+        set heading(numbering: "1.")
 
         body
       }
@@ -70,8 +93,6 @@
     ),
     ..args,
   )
-
-  set heading(numbering: "1.")
 
   body
 }

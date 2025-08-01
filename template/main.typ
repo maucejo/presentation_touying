@@ -5,7 +5,6 @@
 )
 
 #let title = [Title
-#v(-0.5em)
 #line(length: 15%, stroke: 0.075em + colors.red)
 #v(-0.5em)
 #text(size: 0.8em, [Subtitle])
@@ -16,13 +15,13 @@
 #let authors = [#text(fill: colors.red, [Author A]) #h(1em) Author B]
 
 #show: presentation-theme.with(
-  // navigation: "mini-slides",
+  navigation: "mini-slides",
   config-info(
     title: title,
     short-title: [Short title],
     author: authors,
     institution: labo,
-    // logo: (image("../src/resources/assets/logo_cnam_lmssc.png"), image("../src/resources/assets/logo_cnam_lmssc.png")),
+    logo: (image("../src/resources/assets/logo_cnam_lmssc.png"), image("../src/resources/assets/logo_cnam_lmssc.png")),
     // logo: image("../src/resources/assets/logo_cnam_lmssc.png"),
   ),
 )
@@ -42,7 +41,11 @@
     $
 ]
 
-- #lorem(20)
+- #lorem(20)#footnote[#lorem(10)]
+
+- #lorem(10)#footnote[#lorem(10)]
+
+
 
 = Second section
 
@@ -53,11 +56,37 @@
 #important[#lorem(10)]
 #question[#lorem(10)]
 
+#custom-box("info", "Important", colors.red)[
+  #lorem(10)
+]
+
+#cbox("Ma boîte", colors.red)[
+  #lorem(10)
+]
+
 = Third's section
 
 #slide(title:none)[
   #lorem(10)
 ]
+
+---
+
+== Lists
+
+#lorem(10)
+
+- #lorem(10)
+  - #lorem(10)
+    - #lorem(10)
+
++ #lorem(10)
+  - #lorem(10)
+    - #lorem(5)
+      - #lorem(5)
+
+- #lorem(10)
+  - #lorem(10)
 
 == Code
 
@@ -78,6 +107,8 @@ end
 
   Questions ?
 ]
+
+#title-slide
 
 #show: appendix
 

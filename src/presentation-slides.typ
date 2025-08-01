@@ -40,7 +40,7 @@
         )
         line(length: 100%, stroke: 0.5pt + self.colors.primary)
 
-        place(dx: 1em, dy: 0.65em, text(size: 1.2em, fill: self.colors.primary, weight: "bold", utils.display-current-heading(level: 2)))
+        place(dx: 1em, dy: 0.65em, text(size: 1.2em, fill: self.colors.primary, weight: "bold", utils.display-current-heading(level: 2, numbered: false)))
       }
     } else {
       return none
@@ -119,11 +119,14 @@
 #let title-slide = touying-slide-wrapper(self => {
   set strong(delta: 0)
   let content = {
+    v(1em)
+    set heading(numbering: none)
     set align(center + horizon)
     if self.info.logo != none{
       set image(height: self.info.title-logo-height)
       if type(self.info.logo) == content {
-        place(top + right, dx: -2cm, dy: 0.25cm, self.info.logo)
+        // place(top + right, dx: -2cm, dy: 0.25cm, self.info.logo)
+        place(top + right, dx: -2cm, dy: 1em, self.info.logo)
       } else {
         let im-grid = {
           grid(
@@ -135,7 +138,8 @@
           )
         }
 
-        place(top, dy: -1.75cm, im-grid)
+        // place(top, dy: -1.75cm, im-grid)
+        place(top, dy: -1.84em, im-grid)
       }
     }
 
@@ -204,7 +208,6 @@
   )
 
   let content = {
-
     set outline.entry(fill: none)
     show outline.entry: it => context {
       let number = it.prefix()

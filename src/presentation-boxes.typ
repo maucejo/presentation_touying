@@ -150,6 +150,62 @@
 )
 #let code(lang: none, body) = touying-fn-wrapper(_code.with(lang: lang, body))
 
+// Custom box
+#let _custom-box(self: none, type, title, color, size: 1em, body) = {
+  set text(size: size)
+
+  let type-box = if type.contains("info") {
+    "resources/assets/icons/info.svg"
+  } else if type.contains("tip") {
+    "resources/assets/icons/light-bulb.svg"
+  } else if type.contains("important") {
+    "resources/assets/icons/report.svg"
+  } else if type.contains("question") {
+    "resources/assets/icons/question.svg"
+  } else {
+    "resources/assets/icons/info.svg"
+  }
+
+  showybox(
+    title: box-title(color-svg(type-box, color, width: 1em), [*#title*]),
+    title-style: (
+      color: color,
+      sep-thickness: 0pt,
+    ),
+    frame: (
+      title-color: color.lighten(80%),
+      border-color: color,
+      body-color: none,
+      thickness: (left: 3pt),
+      radius: (top-left: 0pt, bottom-right: 1em, top-right: 1em),
+    )
+  )[#body]
+}
+#let custom-box(type, title, color, body) = touying-fn-wrapper(_custom-box.with(type, title, color, body))
+
+// Centered box
+#let _cbox(self: none, title, color, body) = {
+  showybox(
+  title: [*#title*],
+  title-style: (
+    boxed-style: (
+      anchor: (x: center, y: horizon)
+    )
+  ),
+  frame: (
+    title-color: color,
+    border-color: color,
+    body-color: color.lighten(80%),
+    thickness: 2pt
+  ),
+  align: center
+)[
+  #body
+  #v(0.5em)
+]
+}
+#let cbox(title, color, body) = touying-fn-wrapper(_cbox.with(title, color, body))
+
 // Link box
 #let _link-box(self: none, location, name) = {
   block(fill: self.colors.primary, radius: 1em, inset: 0.5em)[
