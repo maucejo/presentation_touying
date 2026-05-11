@@ -1,4 +1,5 @@
 #import "@preview/touying:0.6.1": *
+#import "presentation-utils.typ": *
 
 #let _typst-builtin-align = align
 
@@ -19,6 +20,7 @@
     let align = _typst-builtin-align
     set strong(delta: 0)
     let header(self) = if title != none {
+      show linebreak: none
       if self.store.navigation == "topbar" {
         set align(top)
         show: components.cell.with(fill: self.colors.primary, inset: 1em)
@@ -29,13 +31,11 @@
         text(size: 0.8em, strong(utils.display-current-heading(level: 2, numbered: false)))
       } else if self.store.navigation == "mini-slides" {
         show: components.cell.with(fill: gradient.linear(self.colors.background.darken(10%), self.colors.background, dir: ttb))
-        components.mini-slides(
+        // components.mini-slides(
+        my-mini-slides(
           self:self,
           fill: self.colors.primary,
           alpha: 60%,
-          display-section: self.store.mini-slides.at("display-section", default: false),
-          display-subsection: self.store.mini-slides.at("display-subsection", default: true),
-          short-heading: self.store.mini-slides.at("short-heading", default: true),
           linebreaks: false
         )
         line(length: 100%, stroke: 0.5pt + self.colors.primary)
@@ -179,6 +179,7 @@
   }
 
   set strong(delta: 0)
+  show linebreak: none
   let header = {
     if self.store.navigation == "topbar" {
       set align(top)

@@ -2,7 +2,7 @@
 #import "presentation-boxes.typ": *
 #import "presentation-slides.typ": *
 
-#let presentation-theme(
+#let presentation(
   aspect-ratio: "16-9",
   lang: "fr",
   navigation: "topbar",
@@ -67,16 +67,19 @@
 
         // Footnote configuration
         set footnote.entry(separator: none)
+        show footnote: set text(fill: self.colors.primary)
         show footnote.entry: it => {
           let loc = it.note.location()
-          let countfoot = counter(footnote).at(loc).first()
+          let cfoot = counter(footnote).at(loc).first()
           set text(size: 0.8em, style: "italic")
 
           v(-1.25em)
-          [#super[#text(fill: self.colors.primary)[#countfoot]] #it.note.body]
+          [#super[#text(fill: self.colors.primary)[#cfoot]] #it.note.body]
           v(1em)
         }
 
+        //  Link styling
+        show link: set text(fill: self.colors.primary)
         set heading(numbering: "1.")
 
         body

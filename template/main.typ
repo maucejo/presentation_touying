@@ -14,7 +14,7 @@
 
 #let authors = [#text(fill: colors.red, [Author A]) #h(1em) Author B]
 
-#show: presentation-theme.with(
+#show: presentation.with(
   navigation: "mini-slides",
   config-info(
     title: title,
@@ -32,7 +32,7 @@
 
 = First section
 
-== Slide title
+== Slide title <s:slide1>
 
 #emphbox[
     $
@@ -46,10 +46,14 @@
 - #lorem(10)#footnote[#lorem(10)]
 
 
+#link-box(<s:slide2>, "Go to the second slide")
+
+#link("https://typst.app/docs/")[Link to Typst documentation]
+
 
 = Second section
 
-== Slide title
+== Slide title <s:slide2>
 
 #info[#lorem(10)]
 #tip[#lorem(10)]
