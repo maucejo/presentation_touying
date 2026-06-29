@@ -231,7 +231,9 @@
 #let new-section-slide(level: 1, numbered: true, title) = touying-slide-wrapper(self => {
   let content = {
     set strong(delta: 0)
-    self.store.sec-count.step()
+    if not self.appendix {
+      self.store.sec-count.step()
+    }
 
     set align(horizon)
     show: pad.with(10%)
