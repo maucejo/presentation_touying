@@ -116,7 +116,7 @@ end
 
 #show: appendix
 
-= Appendices <touying:hidden>
+= Appendices <touying:unoutlined>
 
 == A first appendix
 

@@ -1,4 +1,4 @@
-#import "@preview/touying:0.6.1": *
+#import "@preview/touying:0.7.4": *
 #import "@preview/showybox:2.0.4": *
 #import "@preview/codelst:2.0.2": sourcecode
 

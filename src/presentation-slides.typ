@@ -1,4 +1,4 @@
-#import "@preview/touying:0.6.1": *
+#import "@preview/touying:0.7.4": *
 #import "presentation-utils.typ": *
 
 #let _typst-builtin-align = align
@@ -109,6 +109,9 @@
     show: setting
 
     if self.store.navigation == "topbar" {v(-1em)}
+    if self.appendix {
+      metadata((kind: "touying-appendix-slide"))
+    }
     body
   }
 
@@ -119,6 +122,7 @@
 #let title-slide = touying-slide-wrapper(self => {
   set strong(delta: 0)
   let content = {
+    metadata((kind: "touying-title-slide"))
     v(1em)
     set heading(numbering: none)
     set align(center + horizon)
@@ -278,7 +282,11 @@
 
   set text(fill: white, size: 2em)
   set strong(delta: 0)
-  touying-slide(self: self, align(_align, strong(body)))
+  let focus-content = [
+    #metadata((kind: "touying-focus-slide"))
+    #align(_align, strong(body))
+  ]
+  touying-slide(self: self, focus-content)
 })
 
 #let empty-slide(body) = touying-slide-wrapper(self => {

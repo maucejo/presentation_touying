@@ -1,4 +1,4 @@
-#import "@preview/touying:0.6.1": *
+#import "@preview/touying:0.7.4": *
 
 /// Show mini slides. It is usually used to show the navigation of the presentation in header.
 ///
@@ -35,10 +35,49 @@
       return
     }
     let first-page = sections.at(0).location().page()
-    headings = headings.filter(it => it.location().page() >= first-page)
+
+    let appendix-marker-pages = (
+      query(metadata)
+        .filter(it => utils.is-kind(it, "touying-appendix-slide"))
+        .map(it => it.location().page())
+      + query(<touying:hidden>).map(it => it.location().page())
+      + query(<touying:unoutlined>).map(it => it.location().page())
+    ).filter(page => page >= first-page)
+
+    let appendix-start-page = appendix-marker-pages
+      .fold(calc.inf, (acc, page) => if page < acc { page } else { acc })
+
+    let in-appendix = self != none and self.appendix
+    let min-page = if in-appendix {
+      appendix-start-page
+    } else {
+      first-page
+    }
+    let max-page = if in-appendix {
+      calc.inf
+    } else {
+      appendix-start-page
+    }
+
+    headings = headings.filter(it => (
+      it.location().page() >= min-page
+        and it.location().page() < max-page
+    ))
+    sections = headings.filter(it => it.level == 1)
+    if sections == () {
+      return
+    }
+    let hidden-slide-pages = query(metadata)
+      .filter(it => (
+        utils.is-kind(it, "touying-focus-slide")
+          or utils.is-kind(it, "touying-title-slide")
+      ))
+      .map(it => it.location().page())
     let slides = query(<touying-metadata>).filter(it => (
       utils.is-kind(it, "touying-new-slide")
-        and it.location().page() >= first-page
+        and it.location().page() >= min-page
+        and it.location().page() < max-page
+        and not hidden-slide-pages.contains(it.location().page())
     ))
     let current-page = here().page()
     let current-index = (
