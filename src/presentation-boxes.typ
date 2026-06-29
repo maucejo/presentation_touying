@@ -1,6 +1,7 @@
 #import "@preview/touying:0.7.4": *
 #import "@preview/showybox:2.0.4": *
-#import "@preview/codelst:2.0.2": sourcecode
+// #import "@preview/codelst:2.0.2": sourcecode
+#import "@preview/zebraw:0.6.3": *
 
 // Emphasized box (for equations)
 #let _emphbox(self: none, body) = {
@@ -135,23 +136,35 @@
 #let question(body) = touying-fn-wrapper(_question.with(body))
 
 // Code box
-#let _code(self: none, lang: none, body) = sourcecode(
-    frame: showybox.with(
-      title: [*Code* #h(1fr) #strong(lang)],
-      frame: (
-        title-color: self.colors.primary,
-        border-color: self.colors.primary,
-        body-color: none,
-        thickness: (left: 3pt),
-        radius: (top-left: 0pt, top-right: 1em),
-      )
-    ),
-    body
+// #let _code(self: none, lang: none, body) = sourcecode(
+//     frame: showybox.with(
+//       title: [*Code* #h(1fr) #strong(lang)],
+//       frame: (
+//         title-color: self.colors.primary,
+//         border-color: self.colors.primary,
+//         body-color: none,
+//         thickness: (left: 3pt),
+//         radius: (top-left: 0pt, top-right: 1em),
+//       )
+//     ),
+//     body
+// )
+#let _code(self: none, lang: none, body) = showybox(
+    title: [#h(00.5em)*Code* #h(1fr) #strong(lang)],
+    frame: (
+      title-color: self.colors.primary,
+      border-color: self.colors.primary,
+      body-color: none,
+      thickness: (left: 3pt),
+      radius: (top-left: 0pt, top-right: 1em),
+      body-inset: (top: 0em, bottom: 0em, left: 0.1em)
+    )
+  )[#zebraw(lang:false, indentation: 2)[#body]]
 )
 #let code(lang: none, body) = touying-fn-wrapper(_code.with(lang: lang, body))
 
 // Custom box
-#let _custom-box(self: none, type, title, color, size: 1em, body) = {
+#let _custom-box(self: none, type, title, color, size: 0.8em, body) = {
   set text(size: size)
 
   let type-box = if type.contains("info") {
